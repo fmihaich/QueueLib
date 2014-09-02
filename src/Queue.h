@@ -58,9 +58,9 @@ public:
      */
     double* getArray();
     //or
-    void getArray(double *array);
+    //void getArray(double *array);
     //or
-    Vector getArray();
+    //Vector getArray();
 
     //add here whatever you want
     
