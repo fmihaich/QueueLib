@@ -56,9 +56,9 @@ class Vector
      */
     friend Vector operator+(const Vector& v, const Vector& w);
     //or
-    Vector& operator+(const Vector& v);
+    //Vector& operator+(const Vector& v);
     //or
-    friend Vector addition(const Vector& v, const Vector& w);
+    //friend Vector addition(const Vector& v, const Vector& w);
 
     /**
      * Addition of matrices
@@ -75,8 +75,12 @@ class Vector
      * @return ??
      * @warning CHOOSE ONE AND ONLY ONE OF THE DEFINITIONS BELOW
      */
-    void getArray(double* array /*in this pointer the inner array is stored*/) const;
+    //void getArray(double* array /*in this pointer the inner array is stored*/) const;
     //or
+    /**
+     * [Flor] I chose this get definition, due to, in my opninion, a getter shall return something.
+     * In case of error, an exception shall thrown.
+     */
     double* getArray() const;
 
     /**
@@ -118,6 +122,7 @@ private:
 
     double* array_;
     unsigned int size_;
+    unsigned int maxSize_;
     //add here whatever you want
 };
 
