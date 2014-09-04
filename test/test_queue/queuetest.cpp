@@ -2,6 +2,7 @@
 #include "queuetest.h"
 #include "Queue.h"
 
+using namespace std;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(queuetest);
 
@@ -18,7 +19,7 @@ queuetest::~queuetest()
 
 void queuetest::setUp() 
 {
-	nMyArray_ = 5;
+    nMyArray_ = 5;
     myArray_ = new double [nMyArray_];
     
     for (unsigned int i = 0; i < nMyArray_; i++){
@@ -47,22 +48,19 @@ void queuetest::testEnqueue()
         queue.enqueue(myArray_[i]);
     }
     
-    double* array = new double [nMyArray_];
-    array  = getArrayAux(queue);
+    double* array  = queue.getArray();
     
     bool ans = true;
     for (unsigned int i = 0; i < nMyArray_; i++){
         ans = ans && (myArray_[i] == array[i]);
     }
-    // add delete
-    delete [] array;
     
     CPPUNIT_ASSERT(ans);
 }
 
 void queuetest::testFullEnqueue() 
 {
-    newSize_ = 100;
+    unsigned int newSize = 100;
     Queue queue = Queue(newSize);
     
     // delete original array
@@ -77,20 +75,16 @@ void queuetest::testFullEnqueue()
     
     // enqueue and dequeue till we get the original queue
     for (unsigned int i = 0; i < newSize; i++){
-        int value = queue.dequeue();
+        double value = queue.dequeue();
         queue.enqueue(value);
     }
     
-    double* array = new double [newSize];
-    array  = getArrayAux(queue);
+    double* array  = queue.getArray();
     
     bool ans = true;
     for (unsigned int i = 0; i < newSize; i++){
         ans = ans && (myArray_[i] == array[i]);
     }
-    
-    // delete array
-    delete [] array;
     
     CPPUNIT_ASSERT(ans);
 }
@@ -106,8 +100,7 @@ void queuetest::testDequeue()
     double first = queue.dequeue();
     bool ans = (first == myArray_[0]);
     
-    double* array = new double [nMyArray_];
-    array = getArrayAux(queue);
+    double* array = queue.getArray();
     for (unsigned int i = 0; i < nMyArray_-1; i++){
         ans = ans && (myArray_[i + 1] == array[i]);
     }
@@ -118,7 +111,6 @@ void queuetest::testDequeue()
     queue.dequeue();
     ans = ans && (queue.dequeue() == myArray_[nMyArray_-1]);
     
-    delete [] array;
     
     CPPUNIT_ASSERT(ans);
 }
@@ -139,13 +131,13 @@ double* queuetest::getArrayAux(Queue& queue)
             array = queue.getArray();
             break;
         case 1:
-            queue.getArray(array);
+            //queue.getArray(array);
             break;
         case 2:
             break;
         case 3: 
-            Vector v = queue.getVector();
-            array = vectortest::getArrayAux(v);
+            //Vector v = queue.getVector();
+            //array = vectortest::getArrayAux(v);
             break;
     }
     

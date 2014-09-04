@@ -23,6 +23,8 @@ public:
      * Constructor
      * @param length is the size of the queue
      * @warning does this method have any sense?
+     * [Flor] I don't consider necessary to implement this constructor
+     * [Flor] I'll implement it just for testing. It's a way to set maxSize_
      */
     Queue(unsigned int length);
     
@@ -36,7 +38,7 @@ public:
      * Destructor.
      * @warning should it be virtual?
      */
-    virtual ~Queue();
+    ~Queue();
 
     /**
      * Enqueue an element (append it to the end of the queue)
@@ -55,6 +57,8 @@ public:
      * @param ??
      * @return ??
      * @warning CHOOSE ONE AND ONLY ONE OF THE DEFINITIONS BELOW
+     * 
+     * [Flor] I chose this in order to make the prototype independient of vector
      */
     double* getArray();
     //or
@@ -66,8 +70,16 @@ public:
     
 private:
 
-    Vector *queue;
+    Vector *queue_;
     //add here whatever you want
+    unsigned int size_;
+    unsigned int maxSize_;
+    int first_;
+    int next_;
+    
+    bool isEmpty();
+    bool isFull();
+    void reallocate();
 };
 
 #endif	/* QUEUE_H */
